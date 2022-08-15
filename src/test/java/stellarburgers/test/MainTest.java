@@ -46,10 +46,10 @@ public class MainTest extends AbstractTest {
     public void clickPersonalCabinetWithoutAuthorizationTest() {
         // Нажать ссылку "Личный кабинет"
         mainPage.headerLinkPersonalCabinetClick();
-        // Убедиться, что открылась форма для регистрации  - есть надпись Вход
+        // Убедиться, что открылась форма для регистрации  - есть надпись "Вход"
         MatcherAssert.assertThat(
                 "Mistake testing temp page is authorization form",
-                mainPage.getTitleEntrance().getText(),
+                loginPage.getTitleEntrance().getText(),
                 equalTo("Вход"));
             }
 
@@ -61,7 +61,7 @@ public class MainTest extends AbstractTest {
         // Авторизация - нажать "Войти в аккаунт", ввести корректные логин и пароль,
         // нажать "Войти"
         mainPage.headerLinkPersonalCabinetClick();
-        mainPage.fillFieldsAndClickButtonAuthorization(userEmail, userPassword);
+        loginPage.fillFieldsAndClickButtonAuthorization(userEmail, userPassword);
         // Убедиться, что кнопка "Войти в аккаунт" сменила надпись на "Оформить заказ"
         MatcherAssert.assertThat(
                 "Authorization was not successful",
@@ -72,14 +72,10 @@ public class MainTest extends AbstractTest {
         // Убедиться, что открывается личный кабинет - есть ссылка "Профиль"
         MatcherAssert.assertThat(
                 "There is no lonk@Profile",
-                mainPage.getLinkProfilePersonalCabinet().getText(),
+                profilePage.getLinkProfilePersonalCabinet().getText(),
                 equalTo("Профиль"));
         // Разлогиниться - нажать ссылку "Выход" в личном кабинете
-        mainPage.linkExitPersonalCabinetClick();
+        profilePage.linkExitPersonalCabinetClick();
     }
-
-
-
-
 
 }
