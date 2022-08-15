@@ -19,7 +19,7 @@ public class MainTest extends AbstractTest {
 
     //Открытие страницы перед проведением тестов
     @Before
-    public void startMainPage() {
+    public void startMainPageAndCreateUser() {
         //Выбор браузера
         if (useOpera) {
             driver = new OperaDriver();
@@ -29,11 +29,15 @@ public class MainTest extends AbstractTest {
         setWebDriver(driver);
         //Отрытие главной страницы
         mainPage = open("https://stellarburgers.nomoreparties.site/", MainPage.class);
+
+        //// Регистрация пользователя перед проведением тестов
     }
 
     @After
-    public void closeDriver() {
+    public void closeDriverAndDeleteUser() {
         driver.quit();
+
+        //// Удаление пользователя
     }
 
     // Проверка перехода в личный кабинет по ссылке в верхнем заголовке "Личный кабинет"
@@ -54,15 +58,28 @@ public class MainTest extends AbstractTest {
     @Test
     public void test()
     {
+        // Авторизация - нажать "Войти в аккаунт", ввести корректные логин и пароль,
+        // нажать "Войти"
         mainPage.headerLinkPersonalCabinetClick();
-        mainPage.fillEmailPasswordField("111111111111111", "55555555555");
-
+        mainPage.fillFieldsAndClickButtonAuthorization(userEmail, userPassword);
+        // Убедиться, что кнопка "Войти в аккаунт" сменила надпись на "Оформить заказ"
+        MatcherAssert.assertThat(
+                "Authorization was not successful",
+                mainPage.getButtonEntrance().getText(),
+                equalTo("Оформить заказ"));
+        // Нажать ссылку "Личный кабинет"
+        mainPage.headerLinkPersonalCabinetClick();
+        // Убедиться, что открывается личный кабинет - есть ссылка "Профиль"
+        MatcherAssert.assertThat(
+                "There is no lonk@Profile",
+                mainPage.getLinkProfilePersonalCabinet().getText(),
+                equalTo("Профиль"));
+        // Разлогиниться - нажать ссылку "Выход" в личном кабинете
+        mainPage.linkExitPersonalCabinetClick();
     }
-    // Авторизация - нажать "Войти в аккаунт", ввести корректные логин и пароль,
-    // нажать "Войти",
-    // убедиться, что кнопка "Войти в аккаунт" сменила надпись на "Оформить заказ"
-    // Нажать ссылку "Личный кабинет"
-    // Убедиться, что открывается личный кабинет - есть надпись "Профиль"
+
+
+
 
 
 }

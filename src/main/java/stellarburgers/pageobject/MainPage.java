@@ -22,7 +22,7 @@ public class MainPage {
 
     // Кнопка "Войти в аккаунт"/"Оформить заказ"
     @FindBy(xpath = "/html/body/div/div/main/section[2]/div/button")
-    private SelenideElement buttonLogin;
+    private SelenideElement buttonEntrance;
 
     // Форма авторизации - надпись "Вход"
     @FindBy(xpath = "/html/body/div/div/main/div/h2")
@@ -32,28 +32,46 @@ public class MainPage {
     @FindBy(xpath = "/html/body/div/div/main/div/form/fieldset[1]/div/div/input")
     private SelenideElement fieldEmailAuthorization;
 
-    //// Форма авторизации - поле для ввода пароля
+    // Форма авторизации - поле для ввода пароля
     @FindBy(xpath = "/html/body/div/div/main/div/form/fieldset[2]/div/div/input")
     private SelenideElement fieldPasswordAuthorization;
 
-    //// Форма авторизации - кнопка "Войти"
+    // Форма авторизации - кнопка "Войти"
+    @FindBy(how = How.XPATH, using = "/html/body/div/div/main/div/form/button")
+    private SelenideElement buttonAuthorization;
+
+    // Личный кабинет - ссылка "Профиль"
+    @FindBy(how = How.XPATH, using = "/html/body/div/div/main/div/nav/ul/li[1]/a")
+    private SelenideElement linkProfilePersonalCabinet;
+
+    //// Личный кабинет - ссылка "Выход"
+    @FindBy(how = How.XPATH, using = "/html/body/div/div/main/div/nav/ul/li[3]/button")
+    private SelenideElement linkExitPersonalCabinet;
+
 
     // Нажать ссылку "Личный кабинет"
     public void headerLinkPersonalCabinetClick() {
         headerLinkPersonalCabinet.click();
     }
 
-    // Нажать кнопку "Войти в аккаунт"
+    // Нажать кнопку "Войти в аккаунт" на главной странице
     public void buttonLoginClick()
     {
-        buttonLogin.click();
+        buttonEntrance.click();
+    }
+
+    // Нажать ссылку "Выход" в личном кабинете
+    public void linkExitPersonalCabinetClick () {
+        linkExitPersonalCabinet.click();
     }
 
     // Заполнить поля Email и Пароль на форме регистрации
-    public void fillEmailPasswordField(String userEmail, String userPassword)
+    // Нажать кнопку "Войти" на форме регистрации
+    public void fillFieldsAndClickButtonAuthorization(String userEmail, String userPassword)
     {
         fieldEmailAuthorization.setValue(userEmail);
         fieldPasswordAuthorization.setValue(userPassword);
+        buttonAuthorization.click();
     }
 
     public SelenideElement getTitleEntrance() {
@@ -72,12 +90,21 @@ public class MainPage {
         this.headerLinkPersonalCabinet = headerLinkPersonalCabinet;
     }
 
-    public SelenideElement getButtonLogin() {
-        return buttonLogin;
+
+    public SelenideElement getButtonEntrance() {
+        return buttonEntrance;
     }
 
-    public void setButtonLogin(SelenideElement buttonLogin) {
-        this.buttonLogin = buttonLogin;
+    public void setButtonEntrance(SelenideElement buttonEntrance) {
+        this.buttonEntrance = buttonEntrance;
+    }
+
+    public SelenideElement getButtonAuthorization() {
+        return buttonAuthorization;
+    }
+
+    public void setButtonAuthorization(SelenideElement buttonAuthorization) {
+        this.buttonAuthorization = buttonAuthorization;
     }
 
     public SelenideElement getFieldEmailAuthorization() {
@@ -94,5 +121,13 @@ public class MainPage {
 
     public void setFieldPasswordAuthorization(SelenideElement fieldPasswordAuthorization) {
         this.fieldPasswordAuthorization = fieldPasswordAuthorization;
+    }
+
+    public SelenideElement getLinkProfilePersonalCabinet() {
+        return linkProfilePersonalCabinet;
+    }
+
+    public void setLinkProfilePersonalCabinet(SelenideElement linkProfilePersonalCabinet) {
+        this.linkProfilePersonalCabinet = linkProfilePersonalCabinet;
     }
 }
