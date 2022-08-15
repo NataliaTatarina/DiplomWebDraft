@@ -36,9 +36,32 @@ public class MainTest extends AbstractTest {
         driver.quit();
     }
 
-    // Нажать "личный кабинет"
+    // Проверка перехода в личный кабинет по ссылке в верхнем заголовке "Личный кабинет"
+    // Пользователь создан, не авторизирован
     @Test
-    public void buttTest (){
-        mainPage.butClick();
+    public void clickPersonalCabinetWithoutAuthorizationTest() {
+        // Нажать ссылку "Личный кабинет"
+        mainPage.headerLinkPersonalCabinetClick();
+        // Убедиться, что открылась форма для регистрации  - есть надпись Вход
+        mainPage.print();
+        MatcherAssert.assertThat(
+                "Mistake testing temp page is authorization form",
+                mainPage.getTitleEntrance().getText(),
+                equalTo("Вход"));
+            }
+
+    // Проверка перехода в личный кабинет по ссылке в верхнем заголовке "Личный кабинет"
+    // Пользователь создан
+    @Test
+    public void test()
+    {
+        System.out.println(mainPage.getButtonLogin().text());
     }
+    // Авторизация - нажать "Войти в аккаунт", ввести корректные логин и пароль,
+    // нажать "Войти",
+    // убедиться, что кнопка "Войти в аккаунт" сменила надпись на "Оформить заказ"
+    // Нажать ссылку "Личный кабинет"
+    // Убедиться, что открывается личный кабинет - есть надпись "Профиль"
+
+
 }
