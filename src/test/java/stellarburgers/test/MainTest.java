@@ -43,7 +43,6 @@ public class MainTest extends AbstractTest {
         // Нажать ссылку "Личный кабинет"
         mainPage.headerLinkPersonalCabinetClick();
         // Убедиться, что открылась форма для регистрации  - есть надпись Вход
-        mainPage.print();
         MatcherAssert.assertThat(
                 "Mistake testing temp page is authorization form",
                 mainPage.getTitleEntrance().getText(),
@@ -55,7 +54,9 @@ public class MainTest extends AbstractTest {
     @Test
     public void test()
     {
-        System.out.println(mainPage.getButtonLogin().text());
+        mainPage.headerLinkPersonalCabinetClick();
+        mainPage.fillEmailPasswordField("111111111111111", "55555555555");
+
     }
     // Авторизация - нажать "Войти в аккаунт", ввести корректные логин и пароль,
     // нажать "Войти",

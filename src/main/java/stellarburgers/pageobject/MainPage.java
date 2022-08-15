@@ -28,11 +28,14 @@ public class MainPage {
     @FindBy(xpath = "/html/body/div/div/main/div/h2")
     private SelenideElement titleEntrance;
 
-    //// Форма авторизации - поле для ввода email
-    @FindBy(xpath = "//*[@id=\"root\"]/div/main/div/form/fieldset[1]/div/div")
+    // Форма авторизации - поле для ввода email
+    @FindBy(xpath = "/html/body/div/div/main/div/form/fieldset[1]/div/div/input")
     private SelenideElement fieldEmailAuthorization;
 
     //// Форма авторизации - поле для ввода пароля
+    @FindBy(xpath = "/html/body/div/div/main/div/form/fieldset[2]/div/div/input")
+    private SelenideElement fieldPasswordAuthorization;
+
     //// Форма авторизации - кнопка "Войти"
 
     // Нажать ссылку "Личный кабинет"
@@ -44,6 +47,13 @@ public class MainPage {
     public void buttonLoginClick()
     {
         buttonLogin.click();
+    }
+
+    // Заполнить поля Email и Пароль на форме регистрации
+    public void fillEmailPasswordField(String userEmail, String userPassword)
+    {
+        fieldEmailAuthorization.setValue(userEmail);
+        fieldPasswordAuthorization.setValue(userPassword);
     }
 
     public SelenideElement getTitleEntrance() {
@@ -68,5 +78,21 @@ public class MainPage {
 
     public void setButtonLogin(SelenideElement buttonLogin) {
         this.buttonLogin = buttonLogin;
+    }
+
+    public SelenideElement getFieldEmailAuthorization() {
+        return fieldEmailAuthorization;
+    }
+
+    public void setFieldEmailAuthorization(SelenideElement fieldEmailAuthorization) {
+        this.fieldEmailAuthorization = fieldEmailAuthorization;
+    }
+
+    public SelenideElement getFieldPasswordAuthorization() {
+        return fieldPasswordAuthorization;
+    }
+
+    public void setFieldPasswordAuthorization(SelenideElement fieldPasswordAuthorization) {
+        this.fieldPasswordAuthorization = fieldPasswordAuthorization;
     }
 }
