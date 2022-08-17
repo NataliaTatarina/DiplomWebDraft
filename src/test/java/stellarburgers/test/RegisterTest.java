@@ -1,16 +1,61 @@
 package stellarburgers.test;
 
-public class RegisterTest {
+import com.codeborne.selenide.Selenide;
+import org.hamcrest.MatcherAssert;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.opera.OperaDriver;
+import stellarburgers.pageobject.MainPage;
+import stellarburgers.pageobject.LoginPage;
+import stellarburgers.pageobject.RegisterPage;
+
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
+import static org.hamcrest.CoreMatchers.equalTo;
 
 
-    //// Перейти к регистрации по клику на "Войти в аккаунт"
-    //// Убедиться, что открылась форма входа - есть надпись "Вход"
-    //// Нажать ссылку - "Зарегистрироваться"
-    //// Убедиться, что открылась форма регистрации - есть надпись "Регистрация"
-    //// Заполнить корректно поля "Имя", "Email", "Пароль"
-    //// Нажать кнопку "Зарегистрироваться"
-    //// Убедиться, что регистрация прошла успешно - форма регистрации сменилась на форму входа
-    //// Есть надпись "Вход"
+public class RegisterTest extends AbstractTest {
+    //Открытие страницы перед проведением тестов
+    @Before
+    public void startMainPageAndCreateUser() {
+        //Выбор браузера
+        if (useOpera) {
+            driver = new OperaDriver();
+        } else {
+            driver = new ChromeDriver();
+        }
+        setWebDriver(driver);
+        //Отрытие главной страницы
+        mainPage = open("https://stellarburgers.nomoreparties.site/", MainPage.class);
+    }
+
+    @After
+    public void closeDriverAndDeleteUser() {
+        driver.quit();
+
+        //// Удаление пользователя
+    }
+
+    @Test
+    public void successRegistrationTest() {
+        //// Перейти к регистрации по клику на "Войти в аккаунт"
+        //// Убедиться, что открылась форма входа - есть надпись "Вход"
+        loginPage = mainPage.buttonLoginClick();
+        //// Нажать ссылку - "Зарегистрироваться"
+        registerPage = loginPage.linkGoToRegistrationClock();
+        //// Заполнить корректно поля "Имя", "Email", "Пароль"
+        //// Нажать кнопку "Зарегистрироваться"
+        registerPage.fillFieldsAndButtonClickRegistration(userName, userEmail, userPassword);
+
+        //// Убедиться, что регистрация прошла успешно - форма регистрации сменилась на форму входа
+        //// Есть надпись "Вход"
+        MatcherAssert.assertThat(
+                "Mistake testing - temp page is still registration form",
+                loginPage.getTitleEntrance().getText(),
+                equalTo("Вход"));
+    }
     //// Удалить учетную запись пользователя
 /*
 // Удалить пользователя

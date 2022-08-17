@@ -1,12 +1,14 @@
 package stellarburgers.pageobject;
 
+import stellarburgers.pageobject.MainPage;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-
+import static org.hamcrest.CoreMatchers.equalTo;
 public class MainPage {
 
     // Верхний заголовок - ссылка "Личный кабинет"
@@ -24,9 +26,19 @@ public class MainPage {
     }
 
     // Нажать кнопку "Войти в аккаунт" на главной странице
-    public void buttonLoginClick()
+    // Перейти на форму входа в профиль
+    public LoginPage buttonLoginClick()
     {
+        // Нажать кнопку "Войти в аккаунт"
         buttonEntrance.click();
+        // Создать PO для LogimPage
+        LoginPage loginPage = Selenide.page(LoginPage.class);
+        // Убедиться, что открылась форма входа - есть надпись "Вход"
+        MatcherAssert.assertThat(
+                "Mistake testing - temp page is not authorization form",
+                loginPage.getTitleEntrance().getText(),
+                equalTo("Вход"));
+        return loginPage;
     }
 
 

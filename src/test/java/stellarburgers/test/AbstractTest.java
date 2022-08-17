@@ -3,6 +3,7 @@ import org.openqa.selenium.WebDriver;
 import stellarburgers.pageobject.LoginPage;
 import stellarburgers.pageobject.MainPage;
 import stellarburgers.pageobject.ProfilePage;
+import stellarburgers.pageobject.RegisterPage;
 
 public class AbstractTest
 {
@@ -13,7 +14,10 @@ public class AbstractTest
 
     protected LoginPage loginPage;
 
-    protected String userEmail = "nata-tatarina@mail.ru";
+    protected RegisterPage registerPage;
+
+    protected String userName = "Test User";
+    protected String userEmail = "nata-tatarina1@mail.ru";
     protected String userPassword = "Q!67mo8)";
 
 }

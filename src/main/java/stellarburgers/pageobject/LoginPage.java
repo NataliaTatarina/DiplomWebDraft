@@ -1,11 +1,18 @@
 package stellarburgers.pageobject;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import stellarburgers.pageobject.RegisterPage;
+
+import static org.hamcrest.CoreMatchers.equalTo;
 
 public class LoginPage {
     //// Форма авторизации - ссылка "Зарегистрироваться"
+    @FindBy(xpath = "/html/body/div/div/main/div/div/p[1]/a")
+    private SelenideElement linkGoToRegistration;
 
     // Форма авторизации - надпись "Вход"
     @FindBy(xpath = "/html/body/div/div/main/div/h2")
@@ -32,6 +39,19 @@ public class LoginPage {
         buttonAuthorization.click();
     }
 
+    // Нажать ссылку "Зарегистироваться" в нижнем меню формы входа в профиль
+    // Перейти на форму регистрации
+    public RegisterPage linkGoToRegistrationClock (){
+        linkGoToRegistration.click();
+        // Создать PO для RegisterPage
+        RegisterPage registerPage = Selenide.page(RegisterPage.class);
+        //// Убедиться, что открылась форма регистрации - есть надпись "Регистрация"
+        MatcherAssert.assertThat(
+                "Mistake opening registration form",
+                registerPage.getTitleRegistration().getText(),
+                equalTo("Регистрация"));
+        return registerPage;
+    }
 
     public SelenideElement getTitleEntrance() {
         return titleEntrance;
@@ -63,5 +83,13 @@ public class LoginPage {
 
     public void setButtonAuthorization(SelenideElement buttonAuthorization) {
         this.buttonAuthorization = buttonAuthorization;
+    }
+
+    public SelenideElement getLinkGoToRegistration() {
+        return linkGoToRegistration;
+    }
+
+    public void setLinkGoToRegistration(SelenideElement linkGoToRegistration) {
+        this.linkGoToRegistration = linkGoToRegistration;
     }
 }
