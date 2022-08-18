@@ -17,7 +17,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 
 public class MainTest extends AbstractTest {
 
-    //Открытие страницы перед проведением тестов
+    // Открытие страницы перед проведением тестов
     @Before
     public void startMainPageAndCreateUser() {
         //Выбор браузера
@@ -29,8 +29,6 @@ public class MainTest extends AbstractTest {
         setWebDriver(driver);
         //Отрытие главной страницы
         mainPage = open("https://stellarburgers.nomoreparties.site/", MainPage.class);
-
-        //// Регистрация пользователя перед проведением тестов
     }
 
     @After
@@ -41,20 +39,22 @@ public class MainTest extends AbstractTest {
     }
 
     // Проверка перехода в личный кабинет по ссылке в верхнем заголовке "Личный кабинет"
-    // Пользователь создан, не авторизирован
+    // Учетная запись пользователя не создана, пользователь не авторизирован
+    // Перенеправит на страницу авторизации
     @Test
     public void clickPersonalCabinetWithoutAuthorizationTest() {
         // Нажать ссылку "Личный кабинет"
         mainPage.headerLinkPersonalCabinetClick();
         // Убедиться, что открылась форма для регистрации  - есть надпись "Вход"
         MatcherAssert.assertThat(
-                "Mistake testing temp page is authorization form",
+                "Mistake - temp page is not authorization form",
                 loginPage.getTitleEntrance().getText(),
                 equalTo("Вход"));
             }
 
     // Проверка перехода в личный кабинет по ссылке в верхнем заголовке "Личный кабинет"
-    // Пользователь создан
+    // Учетная запись пользователя не создана, пользователь авторизирован
+    // Перенаправит на страницу с профилем пользователя
     @Test
     public void test()
     {

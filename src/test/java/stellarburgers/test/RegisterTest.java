@@ -1,20 +1,14 @@
 package stellarburgers.test;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
-import org.hamcrest.MatcherAssert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import stellarburgers.pageobject.MainPage;
-import stellarburgers.pageobject.LoginPage;
-import stellarburgers.pageobject.RegisterPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
-import static org.hamcrest.CoreMatchers.equalTo;
 
 
 public class RegisterTest extends AbstractTest {
@@ -34,7 +28,7 @@ public class RegisterTest extends AbstractTest {
 
     @After
     public void closeDriverAndDeleteUser() {
-       // driver.quit();
+      driver.quit();
 
         //// Удаление пользователя
     }
@@ -50,6 +44,7 @@ public class RegisterTest extends AbstractTest {
         System.out.println(driver.getCurrentUrl());
         // Заполнить корректно поля "Имя", "Email", "Пароль"
         // Нажать кнопку "Зарегистрироваться"
+        // Проверить, что вернулись на форму входа - есть надпись "Вход"
         registerPage.fillFieldsAndButtonClickRegistration(userName, userEmail, userPassword);
         System.out.println(driver.getCurrentUrl());
     }
