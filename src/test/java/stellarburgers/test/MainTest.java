@@ -56,7 +56,7 @@ public class MainTest extends AbstractTest {
     // Учетная запись пользователя не создана, пользователь авторизирован
     // Перенаправит на страницу с профилем пользователя
     @Test
-    public void test()
+    public void clickPersonalCabinetWithAuthorizationTest()
     {
         // Авторизация - нажать "Войти в аккаунт", ввести корректные логин и пароль,
         // нажать "Войти"
@@ -71,7 +71,7 @@ public class MainTest extends AbstractTest {
         mainPage.headerLinkPersonalCabinetClick();
         // Убедиться, что открывается личный кабинет - есть ссылка "Профиль"
         MatcherAssert.assertThat(
-                "There is no lonk@Profile",
+                "There is no link Profile",
                 profilePage.getLinkProfilePersonalCabinet().getText(),
                 equalTo("Профиль"));
         // Разлогиниться - нажать ссылку "Выход" в личном кабинете
