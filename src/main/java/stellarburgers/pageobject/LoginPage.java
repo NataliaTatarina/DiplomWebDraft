@@ -10,25 +10,26 @@ import stellarburgers.pageobject.RegisterPage;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 public class LoginPage {
-    //// Форма авторизации - ссылка "Зарегистрироваться"
-    @FindBy(xpath = "/html/body/div/div/main/div/div/p[1]/a")
+    // Форма авторизации - ссылка "Зарегистрироваться"
+    @FindBy(xpath = "//div/main/div/div/p[1]/a[@href='/register']")
     private SelenideElement linkGoToRegistration;
 
+
     // Форма авторизации - надпись "Вход"
-    @FindBy(xpath = "/html/body/div/div/main/div/h2")
+    @FindBy(xpath = "//div/main/div/h2[text()='Вход']")
     private SelenideElement titleEntrance;
 
     // Форма авторизации - поле для ввода email
-    @FindBy(xpath = "/html/body/div/div/main/div/form/fieldset[1]/div/div/input")
+    @FindBy(xpath = "//div/main/div/form/fieldset[1]/div/div/input[@name = 'name']")
     private SelenideElement fieldEmailAuthorization;
 
     // Форма авторизации - поле для ввода пароля
-    @FindBy(xpath = "/html/body/div/div/main/div/form/fieldset[2]/div/div/input")
+    @FindBy(xpath = "//div/main/div/form/fieldset[2]/div/div/input[@name = 'Пароль']")
     private SelenideElement fieldPasswordAuthorization;
 
     // Форма авторизации - кнопка "Войти"
-    @FindBy(how = How.XPATH, using = "/html/body/div/div/main/div/form/button")
-    private SelenideElement buttonAuthorization;
+    @FindBy(how = How.XPATH, using = "//div/main/div/form/button[text()='Войти']")
+     private SelenideElement buttonAuthorization;
 
     // Заполнить поля Email и Пароль на форме регистрации
     // Нажать кнопку "Войти" на форме регистрации
@@ -41,7 +42,7 @@ public class LoginPage {
 
     // Нажать ссылку "Зарегистироваться" в нижнем меню формы входа в профиль
     // Перейти на форму регистрации
-    public RegisterPage linkGoToRegistrationClock (){
+    public RegisterPage linkGoToRegistrationClick (){
         linkGoToRegistration.click();
         // Создать PO для RegisterPage
         RegisterPage registerPage = Selenide.page(RegisterPage.class);

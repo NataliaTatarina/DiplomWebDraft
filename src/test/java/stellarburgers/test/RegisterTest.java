@@ -1,5 +1,6 @@
 package stellarburgers.test;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import org.hamcrest.MatcherAssert;
 import org.junit.After;
@@ -28,34 +29,35 @@ public class RegisterTest extends AbstractTest {
         }
         setWebDriver(driver);
         //Отрытие главной страницы
-        mainPage = open("https://stellarburgers.nomoreparties.site/", MainPage.class);
+        mainPage = open("https://stellarburgers.nomoreparties.site", MainPage.class);
     }
 
     @After
     public void closeDriverAndDeleteUser() {
-        driver.quit();
+       // driver.quit();
 
         //// Удаление пользователя
     }
 
     @Test
     public void successRegistrationTest() {
-        //// Перейти к регистрации по клику на "Войти в аккаунт"
-        //// Убедиться, что открылась форма входа - есть надпись "Вход"
+        // Перейти к регистрации по клику на "Войти в аккаунт"
+        // Убедиться, что открылась форма входа - есть надпись "Вход"
         loginPage = mainPage.buttonLoginClick();
-        //// Нажать ссылку - "Зарегистрироваться"
-        registerPage = loginPage.linkGoToRegistrationClock();
-        //// Заполнить корректно поля "Имя", "Email", "Пароль"
-        //// Нажать кнопку "Зарегистрироваться"
+        System.out.println(driver.getCurrentUrl());
+        // Нажать ссылку - "Зарегистрироваться"
+        registerPage = loginPage.linkGoToRegistrationClick();
+        System.out.println(driver.getCurrentUrl());
+        // Заполнить корректно поля "Имя", "Email", "Пароль"
+        // Нажать кнопку "Зарегистрироваться"
         registerPage.fillFieldsAndButtonClickRegistration(userName, userEmail, userPassword);
-
-        //// Убедиться, что регистрация прошла успешно - форма регистрации сменилась на форму входа
-        //// Есть надпись "Вход"
-        MatcherAssert.assertThat(
-                "Mistake testing - temp page is still registration form",
-                loginPage.getTitleEntrance().getText(),
-                equalTo("Вход"));
+        System.out.println(driver.getCurrentUrl());
     }
+
+
+
+
+
     //// Удалить учетную запись пользователя
 /*
 // Удалить пользователя
@@ -72,4 +74,6 @@ public static void deleteUserCheckStatus(RequestSpecification requestSpec, UserR
                 .statusCode(SC_ACCEPTED);
     }
  */
+
+
 }

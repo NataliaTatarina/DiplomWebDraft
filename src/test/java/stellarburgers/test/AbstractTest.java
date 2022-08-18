@@ -17,7 +17,7 @@ public class AbstractTest
     protected RegisterPage registerPage;
 
     protected String userName = "Test User";
-    protected String userEmail = "nata-tatarina1@mail.ru";
+    protected String userEmail = "nata-tatarina3@mail.ru";
     protected String userPassword = "Q!67mo8)";
 
 }
