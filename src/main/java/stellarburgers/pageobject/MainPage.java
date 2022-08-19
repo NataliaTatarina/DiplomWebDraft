@@ -20,9 +20,22 @@ public class MainPage {
     @FindBy(xpath = "/html/body/div/div/main/section[2]/div/button")
     private SelenideElement buttonEntrance;
 
-    // Нажать ссылку "Личный кабинет"
+    // Нажать ссылку "Личный кабинет" без анализа результата
     public void headerLinkPersonalCabinetClick() {
+        // Нажать кнопку "Личный кабинет"
         headerLinkPersonalCabinet.click();
+    }
+    public ProfilePage headerLinkPersonalCabinetClickForAuthorizedUser() {
+        // Нажать кнопку "Личный кабинет"
+        headerLinkPersonalCabinet.click();
+        // Создать PO для ProfilePage
+        ProfilePage profilePage = Selenide.page(ProfilePage.class);
+        // Убедиться, что открылcя личный кабинет - есть надпись "Профиль"
+       /* MatcherAssert.assertThat(
+                "There is no link Profile",
+                profilePage.getLinkProfilePersonalCabinet().getText(),
+                equalTo("Профиль"));*/
+        return profilePage;
     }
 
     // Нажать кнопку "Войти в аккаунт" на главной странице

@@ -45,8 +45,7 @@ public class RegisterPage {
         fieldPassword.setValue(userPassword);
         buttonRegister.click();
     }
-
-   public void setTitleRegistration(SelenideElement titleRegistration) {
+       public void setTitleRegistration(SelenideElement titleRegistration) {
         this.titleRegistration = titleRegistration;
     }
 

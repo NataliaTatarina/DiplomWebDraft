@@ -8,6 +8,7 @@ public class ProfilePage {
     // Личный кабинет - ссылка "Профиль"
     @FindBy(how = How.XPATH, using = "/div/main/div/nav/ul/li[1]/a[@href='/account/profile']")
     private SelenideElement linkProfilePersonalCabinet;
+
     // Личный кабинет - ссылка "Выход"
     @FindBy(how = How.XPATH, using = "//div/main/div/nav/ul/li[3]/button[text()='Выход']")
     private SelenideElement linkExitPersonalCabinet;

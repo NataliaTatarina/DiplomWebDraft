@@ -1,12 +1,16 @@
 package stellarburgers.test;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.opera.OperaDriver;
+import stellarburger.proc.DeleteUserAPI;
+import stellarburgers.pageobject.LoginPage;
 import stellarburgers.pageobject.MainPage;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -33,13 +37,13 @@ public class MainTest extends AbstractTest {
 
     @After
     public void closeDriverAndDeleteUser() {
-        driver.quit();
+        //driver.quit();
 
         //// Удаление пользователя
     }
 
     // Проверка перехода в личный кабинет по ссылке в верхнем заголовке "Личный кабинет"
-    // Учетная запись пользователя не создана, пользователь не авторизирован
+    // Пользователь не авторизирован
     // Перенеправит на страницу авторизации
     @Test
     public void clickPersonalCabinetWithoutAuthorizationTest() {
@@ -53,29 +57,30 @@ public class MainTest extends AbstractTest {
             }
 
     // Проверка перехода в личный кабинет по ссылке в верхнем заголовке "Личный кабинет"
-    // Учетная запись пользователя не создана, пользователь авторизирован
+    // Пользователь авторизирован
     // Перенаправит на страницу с профилем пользователя
     @Test
     public void clickPersonalCabinetWithAuthorizationTest()
     {
-        // Авторизация - нажать "Войти в аккаунт", ввести корректные логин и пароль,
-        // нажать "Войти"
+        // Создать учетную запись пользователя
+        loginPage = mainPage.buttonLoginClick();
+        registerPage = loginPage.linkGoToRegistrationClick();
+        registerPage.fillFieldsAndButtonClickRegistration(userName, userEmail, userPassword);
+        // Авторизация - ввести корректные логин и пароль, нажать "Войти"
         mainPage.headerLinkPersonalCabinetClick();
         loginPage.fillFieldsAndClickButtonAuthorization(userEmail, userPassword);
-        // Убедиться, что кнопка "Войти в аккаунт" сменила надпись на "Оформить заказ"
-        MatcherAssert.assertThat(
-                "Authorization was not successful",
-                mainPage.getButtonEntrance().getText(),
-                equalTo("Оформить заказ"));
         // Нажать ссылку "Личный кабинет"
-        mainPage.headerLinkPersonalCabinetClick();
         // Убедиться, что открывается личный кабинет - есть ссылка "Профиль"
-        MatcherAssert.assertThat(
-                "There is no link Profile",
-                profilePage.getLinkProfilePersonalCabinet().getText(),
-                equalTo("Профиль"));
+        profilePage = mainPage.headerLinkPersonalCabinetClickForAuthorizedUser();
+        System.out.println(driver.getCurrentUrl());
+        System.out.println(profilePage.getLinkProfilePersonalCabinet().getText());
+
         // Разлогиниться - нажать ссылку "Выход" в личном кабинете
         profilePage.linkExitPersonalCabinetClick();
+        // Удалить учетную запись пользователя
+        DeleteUserAPI.deleteUserAPI(userEmail, userPassword);
     }
+
+
 
 }
