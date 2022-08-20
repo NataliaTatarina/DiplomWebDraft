@@ -9,6 +9,9 @@ import org.openqa.selenium.support.FindBy;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 public class RegisterPage {
+    // Верхний заголовок - ссылка "Личный кабинет"
+    @FindBy(xpath = "//div/header/nav/a/p[@class='AppHeader_header__linkText__3q_va ml-2']")
+    private SelenideElement headerLinkPersonalCabinet;
 
     // Форма регистрации - надпись "Регистрация"
     @FindBy(xpath = "//div/main/div/h2[text()='Регистрация']")
@@ -44,6 +47,28 @@ public class RegisterPage {
         fieldEmail.setValue(userEmail);
         fieldPassword.setValue(userPassword);
         buttonRegister.click();
+    }
+    public LoginPage fillFieldsAndButtonClickRegistration1  (String userName, String userEmail, String userPassword)
+    {
+
+        fieldName.setValue(userName);
+        fieldEmail.setValue(userEmail);
+        fieldPassword.setValue(userPassword);
+        buttonRegister.click();
+        LoginPage loginPage = Selenide.page(LoginPage.class);
+        return loginPage;
+    }
+
+    public void headerLinkPersonalCabinetClick()
+    {
+        headerLinkPersonalCabinet.click();
+    }
+
+    public LoginPage headerLinkPersonalCabinetClick1()
+    {
+        headerLinkPersonalCabinet.click();
+        LoginPage loginPage = Selenide.page(LoginPage.class);
+        return loginPage;
     }
        public void setTitleRegistration(SelenideElement titleRegistration) {
         this.titleRegistration = titleRegistration;
@@ -88,4 +113,5 @@ public class RegisterPage {
     public void setWrongPasswordErrorMessage(SelenideElement wrongPasswordErrorMessage) {
         this.wrongPasswordErrorMessage = wrongPasswordErrorMessage;
     }
+
 }

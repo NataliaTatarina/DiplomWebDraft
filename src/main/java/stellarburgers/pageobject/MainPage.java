@@ -22,6 +22,10 @@ public class MainPage {
     @FindBy(xpath = "/html/body/div/div/main/section[2]/div/button")
     private SelenideElement buttonEntrance;
 
+    // Надпись "Соберите бургер"
+    @FindBy(how = How.XPATH, using = "//div/main/section[1]/h1[text()='Соберите бургер']")
+    private SelenideElement titleGetBurger;
+
     // Ссылка "Булка"
     // Ссылка "Соус"
 
@@ -74,4 +78,11 @@ public class MainPage {
         this.buttonEntrance = buttonEntrance;
     }
 
+    public SelenideElement getTitleGetBurger() {
+        return titleGetBurger;
+    }
+
+    public void setTitleGetBurger(SelenideElement titleGetBurger) {
+        this.titleGetBurger = titleGetBurger;
+    }
 }

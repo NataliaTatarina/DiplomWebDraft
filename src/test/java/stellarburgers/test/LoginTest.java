@@ -28,13 +28,12 @@ public class LoginTest extends AbstractTest{
 
     @After
     public void closeDriverAndDeleteUser() {
-         driver.quit();
+         //driver.quit();
 
         //// Удаление пользователя
     }
 @Test
     public void tryq () {
-
     loginPage.fillFieldsAndClickButtonAuthorization(userEmail, userPassword);
     }
 }

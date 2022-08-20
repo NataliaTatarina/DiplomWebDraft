@@ -18,7 +18,7 @@ public class AbstractTest
 
 
     protected String userName = "Test User";
-    protected String userEmail = "nata-tatarina8@mail.ru";
+    protected String userEmail = "nata-tatarina15@mail.ru";
     protected String userPassword = "Q!67mo8)";
 
 }

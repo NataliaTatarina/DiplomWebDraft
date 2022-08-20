@@ -20,7 +20,7 @@ public class LoginPage {
     private SelenideElement titleEntrance;
 
     // Форма авторизации - поле для ввода email
-    @FindBy(xpath = "//div/main/div/form/fieldset[1]/div/div/input[@name = 'name']")
+    @FindBy(xpath = "//div/main/div/form/fieldset[1]/div/div/input[@type='text']")
     private SelenideElement fieldEmailAuthorization;
 
     // Форма авторизации - поле для ввода пароля
@@ -38,6 +38,11 @@ public class LoginPage {
         fieldEmailAuthorization.setValue(userEmail);
         fieldPasswordAuthorization.setValue(userPassword);
         buttonAuthorization.click();
+    }
+
+    public void buttonAuthorizationClick ()
+    {
+         buttonAuthorization.click();
     }
 
     // Нажать ссылку "Зарегистироваться" в нижнем меню формы входа в профиль
