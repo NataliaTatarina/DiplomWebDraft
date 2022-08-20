@@ -8,7 +8,9 @@ import com.codeborne.selenide.SelenideElement;
 import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+
 import static org.hamcrest.CoreMatchers.equalTo;
+
 public class MainPage {
 
     // Верхний заголовок - ссылка "Личный кабинет"
@@ -20,28 +22,28 @@ public class MainPage {
     @FindBy(xpath = "/html/body/div/div/main/section[2]/div/button")
     private SelenideElement buttonEntrance;
 
+    // Ссылка "Булка"
+    // Ссылка "Соус"
+
     // Нажать ссылку "Личный кабинет" без анализа результата
-    public void headerLinkPersonalCabinetClick() {
+    public LoginPage headerLinkPersonalCabinetClickWithountAuthorization() {
         // Нажать кнопку "Личный кабинет"
         headerLinkPersonalCabinet.click();
+        LoginPage loginPage = Selenide.page(LoginPage.class);
+        return loginPage;
     }
+
     public ProfilePage headerLinkPersonalCabinetClickForAuthorizedUser() {
         // Нажать кнопку "Личный кабинет"
         headerLinkPersonalCabinet.click();
         // Создать PO для ProfilePage
         ProfilePage profilePage = Selenide.page(ProfilePage.class);
-        // Убедиться, что открылcя личный кабинет - есть надпись "Профиль"
-       /* MatcherAssert.assertThat(
-                "There is no link Profile",
-                profilePage.getLinkProfilePersonalCabinet().getText(),
-                equalTo("Профиль"));*/
         return profilePage;
     }
 
     // Нажать кнопку "Войти в аккаунт" на главной странице
     // Перейти на форму входа в профиль
-    public LoginPage buttonLoginClick()
-    {
+    public LoginPage buttonLoginClick() {
         // Нажать кнопку "Войти в аккаунт"
         buttonEntrance.click();
         // Создать PO для LogimPage
@@ -53,7 +55,6 @@ public class MainPage {
                 equalTo("Вход"));
         return loginPage;
     }
-
 
 
     public SelenideElement getHeaderLinkPersonalCabinet() {

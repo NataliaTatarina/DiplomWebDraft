@@ -6,7 +6,7 @@ import org.openqa.selenium.support.How;
 
 public class ProfilePage {
     // Личный кабинет - ссылка "Профиль"
-    @FindBy(how = How.XPATH, using = "/div/main/div/nav/ul/li[1]/a[@href='/account/profile']")
+    @FindBy(how = How.XPATH, using = "//div/main/div/nav/ul/li[1]/a[text()='Профиль']")
     private SelenideElement linkProfilePersonalCabinet;
 
     // Личный кабинет - ссылка "Выход"
