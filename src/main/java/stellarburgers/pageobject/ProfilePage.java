@@ -16,7 +16,7 @@ public class ProfilePage {
     private SelenideElement linkExitPersonalCabinet;
 
     // Верхнее меню - логотип
-    @FindBy(how = How.XPATH, using = "//div/header/nav/div/a/svg")
+    @FindBy(how = How.XPATH, using = "//div/header/nav/div/a[@href='/']")
     private SelenideElement stellarBurgersLogo;
 
     // Верхнее меню - ссылка "Конструктор"
@@ -37,12 +37,15 @@ public class ProfilePage {
     }
 
     // Нажать на логотип StellarBurger в верхнем меню
-    public MainPage stellarBurgersLogoClick(){
+    public void stellarBurgersLogoClick(){
         stellarBurgersLogo.click();
-        // Создать PO для MainPage
-        MainPage mainPage = Selenide.page(MainPage.class);
-        return mainPage;
     }
+
+    // Нажать на ссылку "Конструктор" в личном кабинете
+    public void linkConstructorClick(){
+        linkConstructor.click();
+    }
+
 
     public SelenideElement getLinkProfilePersonalCabinet() {
         return linkProfilePersonalCabinet;
@@ -58,5 +61,21 @@ public class ProfilePage {
 
     public void setLinkExitPersonalCabinet(SelenideElement linkExitPersonalCabinet) {
         this.linkExitPersonalCabinet = linkExitPersonalCabinet;
+    }
+
+    public SelenideElement getStellarBurgersLogo() {
+        return stellarBurgersLogo;
+    }
+
+    public void setStellarBurgersLogo(SelenideElement stellarBurgersLogo) {
+        this.stellarBurgersLogo = stellarBurgersLogo;
+    }
+
+    public SelenideElement getLinkConstructor() {
+        return linkConstructor;
+    }
+
+    public void setLinkConstructor(SelenideElement linkConstructor) {
+        this.linkConstructor = linkConstructor;
     }
 }

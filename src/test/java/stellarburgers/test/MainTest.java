@@ -34,7 +34,7 @@ public class MainTest extends AbstractTest {
         //Отрытие главной страницы
         mainPage = open("https://stellarburgers.nomoreparties.site/", MainPage.class);
         // Создать учетную запись пользователя
-        loginPage = mainPage.buttonLoginClick();
+        loginPage = mainPage.buttonEntranceClickReturnLoginPage();
         registerPage = loginPage.linkGoToRegistrationClick();
         registerPage.fillFieldsAndButtonClickRegistration(userName, userEmail, userPassword);
 

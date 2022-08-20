@@ -29,6 +29,11 @@ public class MainPage {
     // Ссылка "Булка"
     // Ссылка "Соус"
 
+    // Нажать кнопку "Войти в аккаунт"/"Оформить заказ"
+    public void buttonEntranceClick() {
+        buttonEntrance.click();
+    }
+
     // Нажать ссылку "Личный кабинет" без анализа результата
     public LoginPage headerLinkPersonalCabinetClickWithountAuthorization() {
         // Нажать кнопку "Личный кабинет"
@@ -47,7 +52,7 @@ public class MainPage {
 
     // Нажать кнопку "Войти в аккаунт" на главной странице
     // Перейти на форму входа в профиль
-    public LoginPage buttonLoginClick() {
+    public LoginPage buttonEntranceClickReturnLoginPage() {
         // Нажать кнопку "Войти в аккаунт"
         buttonEntrance.click();
         // Создать PO для LogimPage

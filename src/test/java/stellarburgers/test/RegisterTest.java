@@ -33,21 +33,17 @@ public class RegisterTest extends AbstractTest {
 
     @After
     public void closeDriver() {
-
-        //driver.quit();
+       driver.quit();
     }
 
     // Успешная регистрация
     @Test
     public void successRegistrationTest() {
-
         // Перейти к регистрации по клику на "Войти в аккаунт"
         // Убедиться, что открылась форма входа - есть надпись "Вход"
-        loginPage = mainPage.buttonLoginClick();
-        System.out.println(driver.getCurrentUrl());
+        loginPage = mainPage.buttonEntranceClickReturnLoginPage();
         // Нажать ссылку - "Зарегистрироваться"
         registerPage = loginPage.linkGoToRegistrationClick();
-        System.out.println(driver.getCurrentUrl());
         // Заполнить корректно поля "Имя", "Email", "Пароль"
         // Нажать кнопку "Зарегистрироваться"
         // Проверить, что вернулись на форму входа - есть надпись "Вход" - регистрация успешна
@@ -56,7 +52,6 @@ public class RegisterTest extends AbstractTest {
                 "Mistake testing - temp page is not authorization form",
                 loginPage.getTitleEntrance().getText(),
                 equalTo("Вход"));
-        System.out.println(driver.getCurrentUrl());
         // Удалить пользователя
         DeleteUserAPI.deleteUserAPI(userEmail, userPassword);
     }
@@ -66,11 +61,9 @@ public class RegisterTest extends AbstractTest {
     public void registrationWithShortPasswordFallsTest() {
         // Перейти к регистрации по клику на "Войти в аккаунт"
         // Убедиться, что открылась форма входа - есть надпись "Вход"
-        loginPage = mainPage.buttonLoginClick();
-        System.out.println(driver.getCurrentUrl());
+        loginPage = mainPage.buttonEntranceClickReturnLoginPage();
         // Нажать ссылку - "Зарегистрироваться"
         registerPage = loginPage.linkGoToRegistrationClick();
-        System.out.println(driver.getCurrentUrl());
         // Заполнить корректно поля "Имя", "Email"
         // Ввести в поле "Пароль" некорректное значение - строку длиной 5 символов
         // Нажать кнопку "Зарегистрироваться"
@@ -79,6 +72,5 @@ public class RegisterTest extends AbstractTest {
         // Проверить, что в появилось сообщение об ошибке
         Assert.assertTrue("Mistake testing - there is no error message for short password",
                 registerPage.getWrongPasswordErrorMessage().isDisplayed());
-        System.out.println(driver.getCurrentUrl());
     }
 }

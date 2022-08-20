@@ -5,10 +5,16 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 
 public class RegisterPage {
+
+    // Верхнее меню - логотип
+    @FindBy(how = How.XPATH, using = "//div/header/nav/div/a[@href='/']")
+    private SelenideElement stellarBurgersLogo;
+
     // Верхний заголовок - ссылка "Личный кабинет"
     @FindBy(xpath = "//div/header/nav/a/p[@class='AppHeader_header__linkText__3q_va ml-2']")
     private SelenideElement headerLinkPersonalCabinet;
@@ -73,6 +79,11 @@ public class RegisterPage {
        public void setTitleRegistration(SelenideElement titleRegistration) {
         this.titleRegistration = titleRegistration;
     }
+
+    public void stellarBurgersLogoClick () {
+        stellarBurgersLogo.click();
+    }
+
 
     public SelenideElement getFieldName() {
         return fieldName;

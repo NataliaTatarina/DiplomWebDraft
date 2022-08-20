@@ -3,6 +3,7 @@ package stellarburgers.pageobject;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import stellarburgers.pageobject.RegisterPage;
@@ -31,8 +32,8 @@ public class LoginPage {
     @FindBy(how = How.XPATH, using = "//div/main/div/form/button[text()='Войти']")
      private SelenideElement buttonAuthorization;
 
-    // Заполнить поля Email и Пароль на форме регистрации
-    // Нажать кнопку "Войти" на форме регистрации
+    // Заполнить поля Email и Пароль на форме авторизации
+    // Нажать кнопку "Войти" на форме авторизации
     public void fillFieldsAndClickButtonAuthorization(String userEmail, String userPassword)
     {
         fieldEmailAuthorization.setValue(userEmail);
@@ -51,13 +52,14 @@ public class LoginPage {
         linkGoToRegistration.click();
         // Создать PO для RegisterPage
         RegisterPage registerPage = Selenide.page(RegisterPage.class);
-        //// Убедиться, что открылась форма регистрации - есть надпись "Регистрация"
+        // Убедиться, что открылась форма регистрации - есть надпись "Регистрация"
         MatcherAssert.assertThat(
                 "Mistake opening registration form",
                 registerPage.getTitleRegistration().getText(),
                 equalTo("Регистрация"));
         return registerPage;
     }
+
 
     public SelenideElement getTitleEntrance() {
         return titleEntrance;
