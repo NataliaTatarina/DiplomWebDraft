@@ -1,14 +1,22 @@
 package stellarburgers.test;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
+import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import stellarburger.proc.DeleteUserAPI;
+import stellarburgers.pageobject.ForgotPasswordPage;
 import stellarburgers.pageobject.LoginPage;
 import stellarburgers.pageobject.MainPage;
+import stellarburgers.pageobject.RegisterPage;
+
+import java.util.concurrent.TimeUnit;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
@@ -25,7 +33,7 @@ public class LoginTest extends AbstractTest {
             driver = new ChromeDriver();
         }
         setWebDriver(driver);
-        //Отрытие главной страницы
+        // Отрытие главной страницы
         mainPage = open("https://stellarburgers.nomoreparties.site", MainPage.class);
         // Создать учетную запись пользователя
         loginPage = mainPage.buttonEntranceClickReturnLoginPage();
@@ -36,60 +44,101 @@ public class LoginTest extends AbstractTest {
 
     @After
     public void closeDriverAndDeleteUser() {
-        // Убедиться, что открылась форма авторизации
-        MatcherAssert.assertThat(
-                "Mistake testing - temp page is not authorization form",
-                loginPage.getTitleEntrance().getText(),
-                equalTo("Вход"));
-        // Выполнить авторизацию
         loginPage.fillFieldsAndClickButtonAuthorization(userEmail, userPassword);
-        // Убедиться, что на главной странице появиась кнопка "Оформить заказ"
-        System.out.println(mainPage.getButtonEntrance().getText());
         MatcherAssert.assertThat(
-                "Mistake testing - authorization failed",
+                "Mistake testing - temp page is not main form",
                 mainPage.getButtonEntrance().getText(),
                 equalTo("Оформить заказ"));
-        // Разлогиниться - нажать ссылку "Личный кабинет"
-        profilePage = mainPage.headerLinkPersonalCabinetClickForAuthorizedUser();
-        // Разлогиниться - нажать ссылку "Выход" в личном кабинете
-        profilePage.linkExitPersonalCabinetClick();
-        // driver.quit();
+                driver.quit();
         // Удалить пользователя
         DeleteUserAPI.deleteUserAPI(userEmail, userPassword);
     }
 
     // Авторизация по кнопке "Войти в аккаунт" на главной форме
     @Test
-    public void getToLoginPageFromMainPageByButtonEnterAccountClick() {
+    public void getToLoginPageFromMainPageByButtonEnterAccountTest() {
         // Нажать кнопку "Войти в аккаунт"
         mainPage.buttonEntranceClick();
+        // Проверить, что текущая страница - форма авторизации
+        MatcherAssert.assertThat(
+                "Mistake testing - temp page is not login form",
+                loginPage.getTitleEntrance().getText(),
+                equalTo("Вход"));
     }
 
     // Авторизация по кнопке "Личный кабинет" на главной форме
     @Test
-    public void getToLoginPageFromMainPageByLinkPersonalAccountClick() {
+    public void getToLoginPageFromMainPageByLinkPersonalAccountTest() {
         // Нажать кнопку "Личный кабинет"
-       loginPage = mainPage.headerLinkPersonalCabinetClickWithountAuthorization();
+        mainPage.headerLinkPersonalCabinetClick();
+        // Проверить, что текущая страница - форма авторизации
+        MatcherAssert.assertThat(
+                "Mistake testing - temp page is not login form",
+                loginPage.getTitleEntrance().getText(),
+                equalTo("Вход"));
     }
 
     // Авторизация по кнопке "Личный кабинет" на форме регистрации
     @Test
-    public void getToLoginPageFromRegisterPageByLinkPersonalAccountClick() {
+    public void getToLoginPageFromRegisterPageByLinkPersonalAccountTest() {
+        // Открыть страницу регистрации
+        RegisterPage registerTest = open("https://stellarburgers.nomoreparties.site/register", RegisterPage.class);
+        // Проверить, что перешли на страницу регистрации
+        MatcherAssert.assertThat(
+                "Mistake opening registration form",
+                registerPage.getTitleRegistration().getText(),
+                CoreMatchers.equalTo("Регистрация"));
+        // Нажать ссылку "Личный кабинет" в верхнем заголовке на форме регистрации
+        registerPage.headerLinkPersonalCabinetClick();
+        // Проверить, что текущая страница - форма авторизации
+        MatcherAssert.assertThat(
+                "Mistake testing - temp page is not login form",
+                loginPage.getTitleEntrance().getText(),
+                equalTo("Вход"));
     }
 
     // Авторизация по ссылке "Войти" на форме регистрации
     @Test
-    public void getToLoginPageFromRegisterPageByLinkEnterClick() {
+    public void getToLoginPageFromRegisterPageByLinkEnterTest() {
+        // Открыть страницу регистрации
+        RegisterPage registerTest = open("https://stellarburgers.nomoreparties.site/register", RegisterPage.class);
+        // Нажать ссылку "Войти" на форме регистрации
+        registerPage.getLinkEnter().scrollIntoView(true);
+        registerPage.linkEnterClick();
+        // Проверить, что текущая страница - форма авторизации
+        MatcherAssert.assertThat(
+                "Mistake testing - temp page is not login form",
+                loginPage.getTitleEntrance().getText(),
+                equalTo("Вход"));
     }
 
     // Авторизация по кнопке "Личный кабинет" на форме восстановления пароля
     @Test
-    public void getToLoginPageFromForgotPasswordPageByLinkPersonalAccountClick() {
+    public void getToLoginPageFromForgotPasswordPageByLinkPersonalAccountTest() {
+        // Открыть страницу регистрации
+        ForgotPasswordPage forgotPasswordPage = open("https://stellarburgers.nomoreparties.site/forgot-password", ForgotPasswordPage.class);
+        // Нажать ссылку "Личный кабинет" на форме восстановления пароля
+        forgotPasswordPage.headerLinkPersonalCabinetClick();
+        // Проверить, что текущая страница - форма авторизации
+        MatcherAssert.assertThat(
+                "Mistake testing - temp page is not login form",
+                loginPage.getTitleEntrance().getText(),
+                equalTo("Вход"));
     }
 
     // Авторизация по ссылке "Войти" на форме восстановления пароля
     @Test
-    public void getToLoginPageFromForgotPasswordPageByLinkEnterClick() {
+    public void getToLoginPageFromForgotPasswordPageByLinkEnterTest() {
+        // Открыть страницу регистрации
+        ForgotPasswordPage forgotPasswordPage = open("https://stellarburgers.nomoreparties.site/forgot-password", ForgotPasswordPage.class);
+       // Нажать ссылку "Войти" на форме восстановления пароля
+        forgotPasswordPage.linkEnterClick();
+
+        // Проверить, что текущая страница - форма авторизации
+        MatcherAssert.assertThat(
+                "Mistake testing - temp page is not login form",
+                loginPage.getTitleEntrance().getText(),
+                equalTo("Вход"));
     }
 
 

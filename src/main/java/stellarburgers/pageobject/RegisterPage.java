@@ -1,13 +1,9 @@
 package stellarburgers.pageobject;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-
-import static org.hamcrest.CoreMatchers.equalTo;
 
 public class RegisterPage {
 
@@ -43,47 +39,39 @@ public class RegisterPage {
     @FindBy(xpath = "//div/main/div/form/fieldset[3]/div/p[@class='input__error text_type_main-default']")
     private SelenideElement wrongPasswordErrorMessage;
 
-    public SelenideElement getTitleRegistration() {
-        return titleRegistration;
-    }
-    public void fillFieldsAndButtonClickRegistration  (String userName, String userEmail, String userPassword)
-    {
+    // Нижный залоговок - ссылка "Войти"
+    @FindBy(xpath = "//div/main/div/div/p/a[@href='/login']")
+    private SelenideElement linkEnter;
+
+
+    public void fillFieldsAndButtonClickRegistration(String userName, String userEmail, String userPassword) {
 
         fieldName.setValue(userName);
         fieldEmail.setValue(userEmail);
         fieldPassword.setValue(userPassword);
         buttonRegister.click();
     }
-    public LoginPage fillFieldsAndButtonClickRegistration1  (String userName, String userEmail, String userPassword)
-    {
 
-        fieldName.setValue(userName);
-        fieldEmail.setValue(userEmail);
-        fieldPassword.setValue(userPassword);
-        buttonRegister.click();
-        LoginPage loginPage = Selenide.page(LoginPage.class);
-        return loginPage;
-    }
-
-    public void headerLinkPersonalCabinetClick()
-    {
+    public void headerLinkPersonalCabinetClick() {
         headerLinkPersonalCabinet.click();
     }
 
-    public LoginPage headerLinkPersonalCabinetClick1()
-    {
-        headerLinkPersonalCabinet.click();
-        LoginPage loginPage = Selenide.page(LoginPage.class);
-        return loginPage;
-    }
-       public void setTitleRegistration(SelenideElement titleRegistration) {
-        this.titleRegistration = titleRegistration;
-    }
-
-    public void stellarBurgersLogoClick () {
+    public void stellarBurgersLogoClick() {
         stellarBurgersLogo.click();
     }
 
+    public void linkEnterClick() {
+
+        linkEnter.click();
+    }
+
+    public SelenideElement getTitleRegistration() {
+        return titleRegistration;
+    }
+
+    public void setTitleRegistration(SelenideElement titleRegistration) {
+        this.titleRegistration = titleRegistration;
+    }
 
     public SelenideElement getFieldName() {
         return fieldName;
@@ -125,4 +113,27 @@ public class RegisterPage {
         this.wrongPasswordErrorMessage = wrongPasswordErrorMessage;
     }
 
+    public SelenideElement getStellarBurgersLogo() {
+        return stellarBurgersLogo;
+    }
+
+    public void setStellarBurgersLogo(SelenideElement stellarBurgersLogo) {
+        this.stellarBurgersLogo = stellarBurgersLogo;
+    }
+
+    public SelenideElement getHeaderLinkPersonalCabinet() {
+        return headerLinkPersonalCabinet;
+    }
+
+    public void setHeaderLinkPersonalCabinet(SelenideElement headerLinkPersonalCabinet) {
+        this.headerLinkPersonalCabinet = headerLinkPersonalCabinet;
+    }
+
+    public SelenideElement getLinkEnter() {
+        return linkEnter;
+    }
+
+    public void setLinkEnter(SelenideElement linkEnter) {
+        this.linkEnter = linkEnter;
+    }
 }

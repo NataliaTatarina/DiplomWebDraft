@@ -1,12 +1,14 @@
 package stellarburgers.pageobject;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import stellarburgers.pageobject.RegisterPage;
+
+import java.time.Duration;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 
@@ -29,26 +31,49 @@ public class LoginPage {
     private SelenideElement fieldPasswordAuthorization;
 
     // Форма авторизации - кнопка "Войти"
-    @FindBy(how = How.XPATH, using = "//div/main/div/form/button[text()='Войти']")
-     private SelenideElement buttonAuthorization;
+    @FindBy(how = How.XPATH, using = "//div/main/div/form/button[@class='button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_medium__3zxIa']")
+
+    private SelenideElement buttonAuthorization;
+
+    // Форма авторизации - ссылка "Восстановить пароль"
+    @FindBy(how = How.XPATH, using = "//div/main/div/div/p[2]/a[text()='Восстановить пароль']")
+    private SelenideElement linkRestorePassword;
 
     // Заполнить поля Email и Пароль на форме авторизации
     // Нажать кнопку "Войти" на форме авторизации
-    public void fillFieldsAndClickButtonAuthorization(String userEmail, String userPassword)
-    {
+    public void fillFieldsAndClickButtonAuthorization(String userEmail, String userPassword) {
         fieldEmailAuthorization.setValue(userEmail);
         fieldPasswordAuthorization.setValue(userPassword);
+        linkRestorePassword.scrollIntoView(true);
+        buttonAuthorization.scrollIntoView(true);
         buttonAuthorization.click();
     }
 
-    public void buttonAuthorizationClick ()
-    {
-         buttonAuthorization.click();
+    public MainPage fillFieldsAndClickButtonAuthorization1(String userEmail, String userPassword) {
+        fieldEmailAuthorization.setValue(userEmail);
+        fieldPasswordAuthorization.setValue(userPassword);
+        buttonAuthorization.click();
+        MainPage mainPage = Selenide.page(MainPage.class);
+       return  mainPage;
     }
+
+    public void buttonAuthorizationClick() {
+        buttonAuthorization.click();
+    }
+
+    public ForgotPasswordPage linkRestorePasswordClick() {
+        linkRestorePassword.scrollIntoView(true);
+        linkRestorePassword.shouldBe(Condition.interactable);
+                linkRestorePassword.click();
+        ForgotPasswordPage forgotPasswordPage = Selenide.page(ForgotPasswordPage.class);
+        return forgotPasswordPage;
+     }
+
+
 
     // Нажать ссылку "Зарегистироваться" в нижнем меню формы входа в профиль
     // Перейти на форму регистрации
-    public RegisterPage linkGoToRegistrationClick (){
+    public RegisterPage linkGoToRegistrationClick() {
         linkGoToRegistration.click();
         // Создать PO для RegisterPage
         RegisterPage registerPage = Selenide.page(RegisterPage.class);
@@ -99,5 +124,13 @@ public class LoginPage {
 
     public void setLinkGoToRegistration(SelenideElement linkGoToRegistration) {
         this.linkGoToRegistration = linkGoToRegistration;
+    }
+
+    public SelenideElement getLinkRestorePassword() {
+        return linkRestorePassword;
+    }
+
+    public void setLinkRestorePassword(SelenideElement linkRestorePassword) {
+        this.linkRestorePassword = linkRestorePassword;
     }
 }

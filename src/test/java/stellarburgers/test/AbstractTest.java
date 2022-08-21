@@ -1,9 +1,6 @@
 package stellarburgers.test;
 import org.openqa.selenium.WebDriver;
-import stellarburgers.pageobject.LoginPage;
-import stellarburgers.pageobject.MainPage;
-import stellarburgers.pageobject.ProfilePage;
-import stellarburgers.pageobject.RegisterPage;
+import stellarburgers.pageobject.*;
 
 public class AbstractTest
 {
@@ -16,7 +13,7 @@ public class AbstractTest
 
     protected RegisterPage registerPage;
 
-
+    protected ForgotPasswordPage forgotPasswordPage;
     protected String userName = "Test User";
     protected String userEmail = "nata-tatarina15@mail.ru";
     protected String userPassword = "Q!67mo8)";

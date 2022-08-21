@@ -1,9 +1,6 @@
 package stellarburgers.test;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
 import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,9 +11,7 @@ import stellarburgers.pageobject.LoginPage;
 import stellarburgers.pageobject.MainPage;
 
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.switchTo;
 import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
-import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 public class MainTest extends AbstractTest {
@@ -42,7 +37,7 @@ public class MainTest extends AbstractTest {
 
     @After
     public void closeDriverAndDeleteUser() {
-        //driver.quit();
+        driver.quit();
     }
 
     // Проверка перехода в личный кабинет по ссылке в верхнем заголовке "Личный кабинет"
@@ -76,10 +71,8 @@ public class MainTest extends AbstractTest {
         // Разлогиниться - нажать ссылку "Выход" в личном кабинете
         profilePage.linkExitPersonalCabinetClick();
         // Удалить учетную запись пользователя
-       DeleteUserAPI.deleteUserAPI(userEmail, userPassword);
+        DeleteUserAPI.deleteUserAPI(userEmail, userPassword);
     }
-
-
 
 
 }

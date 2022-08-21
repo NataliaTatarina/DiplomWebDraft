@@ -1,8 +1,5 @@
 package stellarburgers.pageobject;
 
-import stellarburgers.pageobject.MainPage;
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.hamcrest.MatcherAssert;
@@ -19,22 +16,38 @@ public class MainPage {
 
 
     // Кнопка "Войти в аккаунт"/"Оформить заказ"
-    @FindBy(xpath = "/html/body/div/div/main/section[2]/div/button")
+    @FindBy(xpath = "//div/main/section[2]/div/button[@class = 'button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_large__G21Vg']")
+    //button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_large__G21Vg
+    //*[@id="root"]/div/main/section[2]/div/button
     private SelenideElement buttonEntrance;
 
     // Надпись "Соберите бургер"
     @FindBy(how = How.XPATH, using = "//div/main/section[1]/h1[text()='Соберите бургер']")
     private SelenideElement titleGetBurger;
 
-    // Ссылка "Булка"
-    // Ссылка "Соус"
+    // Ссылка "Булки"
+    @FindBy(how = How.XPATH,
+            using = "//div/main/section[1]/div[1]/div[1]/span[text()='Булки']")
+    private SelenideElement linkBuns;
+
+    // Ссылка "Начинки"
+    @FindBy(how = How.XPATH,
+            using = "//div/main/section[1]/div[1]/div[3]/span[text()='Начинки']")
+    private SelenideElement linkToppings;
+
+    // Ссылка "Соусы"
+    @FindBy(how = How.XPATH,
+            using = "//div/main/section[1]/div[1]/div[2]/span[text()='Соусы']")
+    private SelenideElement linkSauces;
 
     // Нажать кнопку "Войти в аккаунт"/"Оформить заказ"
     public void buttonEntranceClick() {
         buttonEntrance.click();
+
     }
 
-    // Нажать ссылку "Личный кабинет" без анализа результата
+
+    // Нажать ссылку "Личный кабинет", перейти на страницу авторизации
     public LoginPage headerLinkPersonalCabinetClickWithountAuthorization() {
         // Нажать кнопку "Личный кабинет"
         headerLinkPersonalCabinet.click();
@@ -42,6 +55,8 @@ public class MainPage {
         return loginPage;
     }
 
+    // Нажать кнопку "Войти в аккаунт" на главной странице
+    // Перейти на форму профиля
     public ProfilePage headerLinkPersonalCabinetClickForAuthorizedUser() {
         // Нажать кнопку "Личный кабинет"
         headerLinkPersonalCabinet.click();
@@ -51,7 +66,7 @@ public class MainPage {
     }
 
     // Нажать кнопку "Войти в аккаунт" на главной странице
-    // Перейти на форму входа в профиль
+    // Перейти на форму авторизации
     public LoginPage buttonEntranceClickReturnLoginPage() {
         // Нажать кнопку "Войти в аккаунт"
         buttonEntrance.click();
@@ -65,6 +80,12 @@ public class MainPage {
         return loginPage;
     }
 
+    // Подготовка к тестированию конструтора
+
+
+    public void headerLinkPersonalCabinetClick() {
+        headerLinkPersonalCabinet.click();
+    }
 
     public SelenideElement getHeaderLinkPersonalCabinet() {
         return headerLinkPersonalCabinet;

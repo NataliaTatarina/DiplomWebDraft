@@ -1,6 +1,5 @@
 package stellarburgers.test;
 
-import com.codeborne.selenide.Selenide;
 import org.hamcrest.MatcherAssert;
 import org.junit.After;
 import org.junit.Assert;
@@ -9,7 +8,6 @@ import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import stellarburger.proc.DeleteUserAPI;
-import stellarburgers.pageobject.LoginPage;
 import stellarburgers.pageobject.MainPage;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -19,7 +17,7 @@ import static org.hamcrest.Matchers.equalTo;
 public class RegisterTest extends AbstractTest {
     //Открытие страницы перед проведением тестов
     @Before
-        public void startMainPageAndCreateUser() {
+    public void startMainPageAndCreateUser() {
         //Выбор браузера
         if (useOpera) {
             driver = new OperaDriver();
@@ -33,7 +31,7 @@ public class RegisterTest extends AbstractTest {
 
     @After
     public void closeDriver() {
-       driver.quit();
+        driver.quit();
     }
 
     // Успешная регистрация
@@ -41,6 +39,7 @@ public class RegisterTest extends AbstractTest {
     public void successRegistrationTest() {
         // Перейти к регистрации по клику на "Войти в аккаунт"
         // Убедиться, что открылась форма входа - есть надпись "Вход"
+
         loginPage = mainPage.buttonEntranceClickReturnLoginPage();
         // Нажать ссылку - "Зарегистрироваться"
         registerPage = loginPage.linkGoToRegistrationClick();
@@ -52,7 +51,7 @@ public class RegisterTest extends AbstractTest {
                 "Mistake testing - temp page is not authorization form",
                 loginPage.getTitleEntrance().getText(),
                 equalTo("Вход"));
-        // Удалить пользователя
+        // Удалить пользователя*/
         DeleteUserAPI.deleteUserAPI(userEmail, userPassword);
     }
 
