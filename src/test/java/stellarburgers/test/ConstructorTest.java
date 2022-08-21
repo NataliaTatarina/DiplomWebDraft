@@ -44,16 +44,19 @@ public class ConstructorTest extends AbstractTest {
     }
 
     @Test
-            public void linkToppingsClickTest ()
-    {
+    public void linkToppingsClickTest() {
         // Нажать ссылку "Начинки"
-        System.out.println("Start");
-        System.out.println(mainPage.getTitleToppings().getText());
-        System.out.println(mainPage.getFirstTopping().isDisplayed());
-        System.out.println(mainPage.getFirstTopping().is(Condition.interactable));
+        System.out.println("START-START-START");
+        System.out.println(
+             mainPage.getQwerty().exists()
+        );
         mainPage.getLinkToppings().click();
-        System.out.println("Finish");
-        System.out.println(mainPage.getTitleToppings().getText());
-        System.out.println(mainPage.getFirstTopping().isDisplayed());
+        System.out.println("FINISH-FINISH-FINISH");
+        System.out.println(
+                mainPage.getQwerty().exists()
+        );
+
     }
 }
+
+

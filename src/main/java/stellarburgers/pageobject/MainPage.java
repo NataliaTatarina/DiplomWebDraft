@@ -43,6 +43,15 @@ public class MainPage {
              using = "//div/main/section[1]/div[2]/h2[3][text()='Начинки']")
      private SelenideElement titleToppings;
 
+
+     @FindBy (how = How.XPATH,
+     using = "//*[@id=\"root\"]/div/main/section[1]/div[1]/div[3]" +
+             "[@class='tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect']")
+     //*[@id="root"]/div/main/section[1]/div[2]/h2[2]
+     private SelenideElement qwerty;
+//<div class="tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect"><span class="text text_type_main-default">Начинки</span></div>
+    //tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect
+
      // Ссылка на первый вариант начинки
      @FindBy(how = How.XPATH,
              using = "//div/main/section[1]/div[2]/ul[3]/a[1]/p[text() ='Мясо бессмертных моллюсков Protostomia']")
@@ -153,5 +162,13 @@ public class MainPage {
 
     public void setFirstTopping(SelenideElement firstTopping) {
         this.firstTopping = firstTopping;
+    }
+
+    public SelenideElement getQwerty() {
+        return qwerty;
+    }
+
+    public void setQwerty(SelenideElement qwerty) {
+        this.qwerty = qwerty;
     }
 }
