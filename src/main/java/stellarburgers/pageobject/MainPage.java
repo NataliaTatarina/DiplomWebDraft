@@ -17,8 +17,6 @@ public class MainPage {
 
     // Кнопка "Войти в аккаунт"/"Оформить заказ"
     @FindBy(xpath = "//div/main/section[2]/div/button[@class = 'button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_large__G21Vg']")
-    //button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_large__G21Vg
-    //*[@id="root"]/div/main/section[2]/div/button
     private SelenideElement buttonEntrance;
 
     // Надпись "Соберите бургер"
@@ -40,13 +38,21 @@ public class MainPage {
             using = "//div/main/section[1]/div[1]/div[2]/span[text()='Соусы']")
     private SelenideElement linkSauces;
 
+     // Надпись "Начинки" в разделе "Конструктор"
+     @FindBy(how = How.XPATH,
+             using = "//div/main/section[1]/div[2]/h2[3][text()='Начинки']")
+     private SelenideElement titleToppings;
+
+     // Ссылка на первый вариант начинки
+     @FindBy(how = How.XPATH,
+             using = "//div/main/section[1]/div[2]/ul[3]/a[1]/p[text() ='Мясо бессмертных моллюсков Protostomia']")
+     private SelenideElement firstTopping;
+
     // Нажать кнопку "Войти в аккаунт"/"Оформить заказ"
     public void buttonEntranceClick() {
         buttonEntrance.click();
 
     }
-
-
     // Нажать ссылку "Личный кабинет", перейти на страницу авторизации
     public LoginPage headerLinkPersonalCabinetClickWithountAuthorization() {
         // Нажать кнопку "Личный кабинет"
@@ -80,9 +86,6 @@ public class MainPage {
         return loginPage;
     }
 
-    // Подготовка к тестированию конструтора
-
-
     public void headerLinkPersonalCabinetClick() {
         headerLinkPersonalCabinet.click();
     }
@@ -110,5 +113,45 @@ public class MainPage {
 
     public void setTitleGetBurger(SelenideElement titleGetBurger) {
         this.titleGetBurger = titleGetBurger;
+    }
+
+    public SelenideElement getLinkBuns() {
+        return linkBuns;
+    }
+
+    public void setLinkBuns(SelenideElement linkBuns) {
+        this.linkBuns = linkBuns;
+    }
+
+    public SelenideElement getLinkToppings() {
+        return linkToppings;
+    }
+
+    public void setLinkToppings(SelenideElement linkToppings) {
+        this.linkToppings = linkToppings;
+    }
+
+    public SelenideElement getLinkSauces() {
+        return linkSauces;
+    }
+
+    public void setLinkSauces(SelenideElement linkSauces) {
+        this.linkSauces = linkSauces;
+    }
+
+    public SelenideElement getTitleToppings() {
+        return titleToppings;
+    }
+
+    public void setTitleToppings(SelenideElement titleToppings) {
+        this.titleToppings = titleToppings;
+    }
+
+    public SelenideElement getFirstTopping() {
+        return firstTopping;
+    }
+
+    public void setFirstTopping(SelenideElement firstTopping) {
+        this.firstTopping = firstTopping;
     }
 }
