@@ -13,6 +13,8 @@ import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import stellarburgers.pageobject.MainPage;
 
+import java.util.concurrent.TimeUnit;
+
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
 
@@ -22,20 +24,14 @@ public class ConstructorTest extends AbstractTest {
     public void startMainPageAndCreateUser() {
         //Выбор браузера
         if (useYandex) {
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("--disable-gpu"); // applicable to windows os only
-            options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
-            options.addArguments("--no-sandbox"); // Bypass OS security model
-            //options.setLogLevel(ChromeDriverLogLevel.OFF);
-            System.setProperty("webdriver.chrome.driver","C:\\WebDriver\\yandexdriver\\yandexdriver.exe");
-            //options.setBinary("C:\\WebDriver\\yandexdriver\\yandexdriver.exe");
-            driver = new ChromeDriver(options);
-        } else {
-            if (useOpera){
-
-                System.setProperty("webdriver.gecko.driver","C:\\WebDriver\\geckodriver-v0.31.0-win64\\geckodriver.exe");
-                driver = new FirefoxDriver();} else
+            System.setProperty("webdriver.chrome.driver", "C:\\WebDriver\\yandexdriver\\yandexdriver.exe");
             driver = new ChromeDriver();
+        } else {
+            if (useFirefox) {
+                System.setProperty("webdriver.gecko.driver", "C:\\WebDriver\\geckodriver-v0.31.0-win64\\geckodriver.exe");
+                driver = new FirefoxDriver();
+            } else
+                driver = new ChromeDriver();
         }
         setWebDriver(driver);
         //Отрытие главной страницы
@@ -48,12 +44,14 @@ public class ConstructorTest extends AbstractTest {
     }
 
     @Test
-    public void linkToppingsClickTest() {
+    public void linkToppingsClickTest() throws InterruptedException {
+        if (useFirefox)
+            TimeUnit.SECONDS.sleep(3);
         mainPage.getLinkToppings().click();
         Assert.assertTrue(
                 "Mistake testing - link Toppings isn't active",
                 mainPage.getActiveLinkToppings().exists());
-        }
+    }
 
     @Test
     public void linkSaucesClickTest() {
@@ -64,11 +62,12 @@ public class ConstructorTest extends AbstractTest {
     }
 
     @Test
-    public void linkBunsClickTest() {
+    public void linkBunsClickTest() throws InterruptedException {
         mainPage.getLinkToppings().click();
         mainPage.getLinkBuns().click();
+        TimeUnit.SECONDS.sleep(3);
         Assert.assertTrue(
-                "Mistake testing - link Toppings isn't active",
+                "Mistake testing - link Buns isn't active",
                 mainPage.getActiveLinkBuns().exists());
     }
 

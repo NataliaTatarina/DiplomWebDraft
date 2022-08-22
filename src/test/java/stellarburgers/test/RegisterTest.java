@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import stellarburger.proc.DeleteUserAPI;
 import stellarburgers.pageobject.MainPage;
@@ -19,10 +20,15 @@ public class RegisterTest extends AbstractTest {
     @Before
     public void startMainPageAndCreateUser() {
         //Выбор браузера
-        if (useOpera) {
-            driver = new OperaDriver();
-        } else {
+        if (useYandex) {
+            System.setProperty("webdriver.chrome.driver", "C:\\WebDriver\\yandexdriver\\yandexdriver.exe");
             driver = new ChromeDriver();
+        } else {
+            if (useFirefox) {
+                System.setProperty("webdriver.gecko.driver", "C:\\WebDriver\\geckodriver-v0.31.0-win64\\geckodriver.exe");
+                driver = new FirefoxDriver();
+            } else
+                driver = new ChromeDriver();
         }
         setWebDriver(driver);
         //Отрытие главной страницы

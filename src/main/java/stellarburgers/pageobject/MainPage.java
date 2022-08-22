@@ -6,6 +6,8 @@ import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 
 public class MainPage {
@@ -64,7 +66,6 @@ public class MainPage {
     // Нажать кнопку "Войти в аккаунт"/"Оформить заказ"
     public void buttonEntranceClick() {
         buttonEntrance.click();
-
     }
     // Нажать ссылку "Личный кабинет", перейти на страницу авторизации
     public LoginPage headerLinkPersonalCabinetClickWithountAuthorization() {

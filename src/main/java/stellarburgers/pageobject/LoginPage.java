@@ -40,7 +40,7 @@ public class LoginPage {
     // Заполнить поля Email и Пароль на форме авторизации
     // Нажать кнопку "Войти" на форме авторизации
     public void fillFieldsAndClickButtonAuthorization(String userEmail, String userPassword) throws InterruptedException {
-        TimeUnit.SECONDS.sleep(2);
+        TimeUnit.SECONDS.sleep(3);
         fieldEmailAuthorization.setValue(userEmail);
         fieldPasswordAuthorization.setValue(userPassword);
         linkRestorePassword.scrollIntoView(true);

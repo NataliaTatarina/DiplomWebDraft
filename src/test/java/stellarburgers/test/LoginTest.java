@@ -6,11 +6,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import stellarburger.proc.DeleteUserAPI;
 import stellarburgers.pageobject.ForgotPasswordPage;
 import stellarburgers.pageobject.MainPage;
 import stellarburgers.pageobject.RegisterPage;
+
+import java.util.concurrent.TimeUnit;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
@@ -21,10 +24,15 @@ public class LoginTest extends AbstractTest {
     @Before
     public void startMainPageAndCreateUser() {
         //Выбор браузера
-        if (useOpera) {
-            driver = new OperaDriver();
-        } else {
+        if (useYandex) {
+            System.setProperty("webdriver.chrome.driver", "C:\\WebDriver\\yandexdriver\\yandexdriver.exe");
             driver = new ChromeDriver();
+        } else {
+            if (useFirefox) {
+                System.setProperty("webdriver.gecko.driver", "C:\\WebDriver\\geckodriver-v0.31.0-win64\\geckodriver.exe");
+                driver = new FirefoxDriver();
+            } else
+                driver = new ChromeDriver();
         }
         setWebDriver(driver);
         // Отрытие главной страницы
@@ -50,7 +58,7 @@ public class LoginTest extends AbstractTest {
 
     // Авторизация по кнопке "Войти в аккаунт" на главной форме
     @Test
-    public void getToLoginPageFromMainPageByButtonEnterAccountTest() {
+    public void getToLoginPageFromMainPageByButtonEnterAccountTest() throws InterruptedException {
         // Нажать кнопку "Войти в аккаунт"
         mainPage.buttonEntranceClick();
         // Проверить, что текущая страница - форма авторизации
