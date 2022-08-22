@@ -1,22 +1,16 @@
 package stellarburgers.test;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import stellarburger.proc.DeleteUserAPI;
 import stellarburgers.pageobject.ForgotPasswordPage;
-import stellarburgers.pageobject.LoginPage;
 import stellarburgers.pageobject.MainPage;
 import stellarburgers.pageobject.RegisterPage;
-
-import java.util.concurrent.TimeUnit;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
@@ -43,7 +37,7 @@ public class LoginTest extends AbstractTest {
     }
 
     @After
-    public void closeDriverAndDeleteUser() {
+    public void closeDriverAndDeleteUser() throws InterruptedException {
         loginPage.fillFieldsAndClickButtonAuthorization(userEmail, userPassword);
         MatcherAssert.assertThat(
                 "Mistake testing - temp page is not main form",

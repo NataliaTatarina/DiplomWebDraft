@@ -4,7 +4,8 @@ import stellarburgers.pageobject.*;
 
 public class AbstractTest
 {
-    protected final Boolean useOpera = false;
+    protected final Boolean useOpera = true;
+    protected final Boolean useYandex = true;
     protected WebDriver driver;
     protected MainPage mainPage;
     protected ProfilePage profilePage;

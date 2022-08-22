@@ -57,7 +57,7 @@ public class MainTest extends AbstractTest {
     // Проверка перехода в личный кабинет по ссылке в верхнем заголовке "Личный кабинет"
     // Пользователь авторизирован - должны быть перенаправлены на страницу с профилем пользователя
     @Test
-    public void clickPersonalCabinetWithAuthorizationTest() {
+    public void clickPersonalCabinetWithAuthorizationTest() throws InterruptedException {
         // Авторизация - ввести корректные логин и пароль, нажать "Войти"
         loginPage = open("https://stellarburgers.nomoreparties.site/login", LoginPage.class);
         loginPage.fillFieldsAndClickButtonAuthorization(userEmail, userPassword);

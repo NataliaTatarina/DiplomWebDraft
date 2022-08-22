@@ -17,7 +17,7 @@ import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
 public class ProfileTest extends AbstractTest {
     // Открытие страницы перед проведением тестов
     @Before
-    public void startMainPageAndCreateUser() {
+    public void startMainPageAndCreateUser() throws InterruptedException {
         //Выбор браузера
         if (useOpera) {
             driver = new OperaDriver();

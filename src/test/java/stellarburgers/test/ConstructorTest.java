@@ -1,11 +1,16 @@
 package stellarburgers.test;
 
-import com.codeborne.selenide.Condition;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverLogLevel;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import stellarburgers.pageobject.MainPage;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -16,9 +21,20 @@ public class ConstructorTest extends AbstractTest {
     @Before
     public void startMainPageAndCreateUser() {
         //Выбор браузера
-        if (useOpera) {
-            driver = new OperaDriver();
+        if (useYandex) {
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--disable-gpu"); // applicable to windows os only
+            options.addArguments("--disable-dev-shm-usage"); // overcome limited resource problems
+            options.addArguments("--no-sandbox"); // Bypass OS security model
+            //options.setLogLevel(ChromeDriverLogLevel.OFF);
+            System.setProperty("webdriver.chrome.driver","C:\\WebDriver\\yandexdriver\\yandexdriver.exe");
+            //options.setBinary("C:\\WebDriver\\yandexdriver\\yandexdriver.exe");
+            driver = new ChromeDriver(options);
         } else {
+            if (useOpera){
+
+                System.setProperty("webdriver.gecko.driver","C:\\WebDriver\\geckodriver-v0.31.0-win64\\geckodriver.exe");
+                driver = new FirefoxDriver();} else
             driver = new ChromeDriver();
         }
         setWebDriver(driver);
@@ -28,35 +44,34 @@ public class ConstructorTest extends AbstractTest {
 
     @After
     public void closeDriverAndDeleteUser() {
-        //driver.quit();
-    }
-
-    @Test
-    // Подготовка к тестированию конструтора
-    public void constructorTest() {
-        System.out.println("Buns");
-        System.out.println(mainPage.getLinkBuns().getText());
-        System.out.println("Toppings");
-        System.out.println(mainPage.getLinkToppings().getText());
-        System.out.println("Sauces");
-        System.out.println(mainPage.getLinkSauces().getText());
-
+        driver.quit();
     }
 
     @Test
     public void linkToppingsClickTest() {
-        // Нажать ссылку "Начинки"
-        System.out.println("START-START-START");
-        System.out.println(
-             mainPage.getQwerty().exists()
-        );
         mainPage.getLinkToppings().click();
-        System.out.println("FINISH-FINISH-FINISH");
-        System.out.println(
-                mainPage.getQwerty().exists()
-        );
+        Assert.assertTrue(
+                "Mistake testing - link Toppings isn't active",
+                mainPage.getActiveLinkToppings().exists());
+        }
 
+    @Test
+    public void linkSaucesClickTest() {
+        mainPage.getLinkSauces().click();
+        Assert.assertTrue(
+                "Mistake testing - link Sauces isn't active",
+                mainPage.getActiveLinkSauces().exists());
     }
+
+    @Test
+    public void linkBunsClickTest() {
+        mainPage.getLinkToppings().click();
+        mainPage.getLinkBuns().click();
+        Assert.assertTrue(
+                "Mistake testing - link Toppings isn't active",
+                mainPage.getActiveLinkBuns().exists());
+    }
+
 }
 
 

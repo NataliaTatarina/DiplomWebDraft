@@ -4,11 +4,10 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.hamcrest.MatcherAssert;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 
@@ -32,7 +31,6 @@ public class LoginPage {
 
     // Форма авторизации - кнопка "Войти"
     @FindBy(how = How.XPATH, using = "//div/main/div/form/button[@class='button_button__33qZ0 button_button_type_primary__1O7Bx button_button_size_medium__3zxIa']")
-
     private SelenideElement buttonAuthorization;
 
     // Форма авторизации - ссылка "Восстановить пароль"
@@ -41,23 +39,12 @@ public class LoginPage {
 
     // Заполнить поля Email и Пароль на форме авторизации
     // Нажать кнопку "Войти" на форме авторизации
-    public void fillFieldsAndClickButtonAuthorization(String userEmail, String userPassword) {
+    public void fillFieldsAndClickButtonAuthorization(String userEmail, String userPassword) throws InterruptedException {
+        TimeUnit.SECONDS.sleep(2);
         fieldEmailAuthorization.setValue(userEmail);
         fieldPasswordAuthorization.setValue(userPassword);
         linkRestorePassword.scrollIntoView(true);
         buttonAuthorization.scrollIntoView(true);
-        buttonAuthorization.click();
-    }
-
-    public MainPage fillFieldsAndClickButtonAuthorization1(String userEmail, String userPassword) {
-        fieldEmailAuthorization.setValue(userEmail);
-        fieldPasswordAuthorization.setValue(userPassword);
-        buttonAuthorization.click();
-        MainPage mainPage = Selenide.page(MainPage.class);
-       return  mainPage;
-    }
-
-    public void buttonAuthorizationClick() {
         buttonAuthorization.click();
     }
 
@@ -68,8 +55,6 @@ public class LoginPage {
         ForgotPasswordPage forgotPasswordPage = Selenide.page(ForgotPasswordPage.class);
         return forgotPasswordPage;
      }
-
-
 
     // Нажать ссылку "Зарегистироваться" в нижнем меню формы входа в профиль
     // Перейти на форму регистрации
@@ -84,7 +69,6 @@ public class LoginPage {
                 equalTo("Регистрация"));
         return registerPage;
     }
-
 
     public SelenideElement getTitleEntrance() {
         return titleEntrance;

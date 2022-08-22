@@ -1,13 +1,11 @@
 package stellarburgers.test;
 
-import com.beust.ah.A;
 import org.hamcrest.MatcherAssert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.opera.OperaDriver;
-import stellarburger.proc.DeleteUserAPI;
 import stellarburgers.pageobject.MainPage;
 
 import static com.codeborne.selenide.Selenide.open;

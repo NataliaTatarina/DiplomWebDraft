@@ -38,19 +38,23 @@ public class MainPage {
             using = "//div/main/section[1]/div[1]/div[2]/span[text()='Соусы']")
     private SelenideElement linkSauces;
 
-     // Надпись "Начинки" в разделе "Конструктор"
-     @FindBy(how = How.XPATH,
-             using = "//div/main/section[1]/div[2]/h2[3][text()='Начинки']")
-     private SelenideElement titleToppings;
-
-
+    // Активная ссылка "Начинки"
      @FindBy (how = How.XPATH,
      using = "//*[@id=\"root\"]/div/main/section[1]/div[1]/div[3]" +
              "[@class='tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect']")
-     //*[@id="root"]/div/main/section[1]/div[2]/h2[2]
-     private SelenideElement qwerty;
-//<div class="tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect"><span class="text text_type_main-default">Начинки</span></div>
-    //tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect
+          private SelenideElement activeLinkToppings;
+
+    // Активная ссылка "Соусы"
+    @FindBy (how = How.XPATH,
+            using = "//*[@id=\"root\"]/div/main/section[1]/div[1]/div[2]" +
+                    "[@class='tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect']")
+    private SelenideElement activeLinkSauces;
+
+    // Активная ссылка "Булки"
+    @FindBy (how = How.XPATH,
+            using = "//*[@id=\"root\"]/div/main/section[1]/div[1]/div[1]" +
+                    "[@class='tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect']")
+    private SelenideElement activeLinkBuns;
 
      // Ссылка на первый вариант начинки
      @FindBy(how = How.XPATH,
@@ -148,14 +152,6 @@ public class MainPage {
         this.linkSauces = linkSauces;
     }
 
-    public SelenideElement getTitleToppings() {
-        return titleToppings;
-    }
-
-    public void setTitleToppings(SelenideElement titleToppings) {
-        this.titleToppings = titleToppings;
-    }
-
     public SelenideElement getFirstTopping() {
         return firstTopping;
     }
@@ -164,11 +160,27 @@ public class MainPage {
         this.firstTopping = firstTopping;
     }
 
-    public SelenideElement getQwerty() {
-        return qwerty;
+    public SelenideElement getActiveLinkToppings() {
+        return activeLinkToppings;
     }
 
-    public void setQwerty(SelenideElement qwerty) {
-        this.qwerty = qwerty;
+    public void setActiveLinkToppings(SelenideElement activeLinkToppings) {
+        this.activeLinkToppings = activeLinkToppings;
+    }
+
+    public SelenideElement getActiveLinkSauces() {
+        return activeLinkSauces;
+    }
+
+    public void setActiveLinkSauces(SelenideElement activeLinkSauces) {
+        this.activeLinkSauces = activeLinkSauces;
+    }
+
+    public SelenideElement getActiveLinkBuns() {
+        return activeLinkBuns;
+    }
+
+    public void setActiveLinkBuns(SelenideElement activeLinkBuns) {
+        this.activeLinkBuns = activeLinkBuns;
     }
 }

@@ -1,6 +1,5 @@
 package stellarburgers.pageobject;
 
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -26,14 +25,6 @@ public class ProfilePage {
     // Нажать ссылку "Выход" в личном кабинете
     public void linkExitPersonalCabinetClick () {
         linkExitPersonalCabinet.click();
-    }
-
-    // Нажать ссылку "Выход" - вернуться на форму авторизации
-    public LoginPage linkExitPersonalCabinetClickBackToLoginPage () {
-        linkExitPersonalCabinet.click();
-        // Создать PO для ProfilePage
-        LoginPage loginPage = Selenide.page(LoginPage.class);
-        return loginPage;
     }
 
     // Нажать на логотип StellarBurger в верхнем меню
